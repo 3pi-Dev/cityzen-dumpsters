@@ -1,0 +1,64 @@
+<div class="modal-header">
+	<button class="close" ng-click="cancel()">&times;</button>
+	<h3 class="modal-title" id="modal-title">{{data.currentBlock.description}}</h3>
+</div>
+<div class="modal-body" id="modal-body">
+
+	<!-- Scroll to device -->
+	<div class="row" ng-if="data.currentBlock.meters.length>2 && data.currentBlock.type!=9">
+		<nav class="navbar navbar-default" style="margin-bottom: 0;">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand"><i class="fas fa-hand-pointer"></i></a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li ng-repeat="(k, v) in data.currentBlock.meters"><a class="clickable" ng-click="scroll('m'+k)">{{v.barcode || v.code}}  <span class="badge">{{v.value | number : 1 }}</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<!-- Devices -->
+	<div id="m{{k}}" class="row meterSet" ng-repeat="(k, v) in data.currentBlock.meters" ng-switch on="v.type" ng-if="data.currentBlock.type != 9">
+		<div uib-collapse="data.meterCard[k]!=0">
+			<div class="col-lg-2 col-md-2 col-sm-4 meter3">
+				{{v.value?((100*(1-((v.value>data.currentBlock.height?data.currentBlock.height:v.value)/data.currentBlock.height))) | number : 0):'-'}} %
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-8">
+				<dl class="dl-horizontal">
+					<dt>{{'st_code'|translate}}</dt>
+					<dd>{{v.code}}</dd>
+					<dt>{{'st_temp'|translate}}</dt>
+					<dd>{{v.temperature}} °C</dd>
+					<dt>{{'st_volt'|translate}}</dt>
+					<dd>{{v.battery}} mV</dd>
+					<br>
+					<span ng-if="v.valve">
+						<dt>{{'st_status'|translate}}</dt>
+						<dd>
+							<span ng-show="v.status==0" class="text-warning"><i class="fa fa-times"></i> {{'st_status0'|translate}}</span>
+							<span ng-show="v.status==1" class="text-success"><i class="fa fa-check"></i> {{'st_status1'|translate}}</span>
+						</dd>
+					</span>
+					<dt>{{'st_lastUpdate'|translate}}</dt>
+					<dd am-time-ago="v.date"></dd>
+				</dl>
+				<p class="text-center">
+					<a ui-sref="report({reportID: 1,blockID: data.currentBlock.id,meterID: v.code})" ng-click="ok()">{{'st_report_lnk'|translate}}</a> | 
+					<a ui-sref="report({reportID: 5,blockID: data.currentBlock.id,meterID: v.code})" ng-click="ok()">{{'st_report_lnk2'|translate}}</a>
+				</p>
+			</div>
+			<div class="col-lg-6 col-md-6 hidden-xs hidden-sm" ng-hide="v.hasHistory">
+				<i class="fas fa-cog fa-spin" data-fa-transform="grow-9 right-120 down-60"></i>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+<h2><i class="fas fa-chart-pie"></i> {{'ov_title'|translate}}</h2>
+<div class="jumbotron">
+	<div class="container">
+		<div class="row placeholders">
+			<div class="col-lg-4 col-md-4 col-sm-4 placeholder">
+				<a ui-sref="map">
+					<div class="bg-warning circle"><i class="fas fa-map-pin fa-7x" data-fa-transform="down-7"></i></div>
+					<h4>{{data.entities.length}}</h4>
+					<span class="text-muted">{{'ov_entities'| translate}}</span>
+				</a>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 placeholder">
+				<a ui-sref="meters">
+					<div class="bg-danger circle"><i class="fas fa-sitemap fa-7x" data-fa-transform="down-7"></i></div>
+					<h4>{{data.devices.length}}</h4>
+					<span class="text-muted">{{'ov_devices'| translate}}</span>
+				</a>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4 placeholder">
+				<a ui-sref="users">
+					<div class="bg-info circle"><i class="fas fa-users fa-7x" data-fa-transform="down-7"></i></div>
+					<h4>{{data.users.length}}</h4>
+					<span class="text-muted">{{'ov_users'| translate}}</span>
+				</a>
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 text-center">
+				<canvas class="chart chart-pie" chart-data="data.entities.chart.data" chart-labels="data.entities.chart.labels" chart-options="data.entities.chart.options" ng-if="data.entities.chart.show"></canvas>
+				<ul class="list-group" ng-if="data.entities.chart.show">
+					<li class="list-group-item" ng-repeat="ent in data.entities.info"><span class="badge">{{ent.count}}</span>{{ent.title}}</li>
+				</ul>
+				<span ng-hide="data.entities.chart.show"><i class="fas fa-cog fa-spin" data-fa-transform="grow-12 down-120"></i></span>
+				<p class="text-center text-muted" ng-show="data.entities.chart.data.length==0">{{'ov_chart_msg'|translate}}</p>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 text-center">
+				<canvas class="chart chart-pie" chart-data="data.devices.chart.data" chart-labels="data.devices.chart.labels" chart-options="data.devices.chart.options" ng-if="data.devices.chart.show"></canvas>
+				<ul class="list-group" ng-if="data.devices.chart.show">
+					<li class="list-group-item" ng-repeat="dev in data.devices.info"><span class="badge">{{dev.count}}</span>{{dev.title}}</li>
+				</ul>
+				<span ng-hide="data.devices.chart.show"><i class="fas fa-cog fa-spin" data-fa-transform="grow-12 down-120"></i></span>
+				<p class="text-center text-muted" ng-show="data.entities.chart.data.length==0">{{'ov_chart_msg'|translate}}</p>
+			</div>
+		</div>
+	</div>
+</div>

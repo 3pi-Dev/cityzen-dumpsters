@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <!-- Primary Meta Tags -->
+        <title>SkyCity</title>
+        <meta name="title" content="SkyCity">
+        <meta name="description" content="Application for Smart Meters(waste management) Management & locations">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <meta name="keywords" content="sky city,smart meters,waste management">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="author" content="3PI Information Systems">
+        <meta name="developer" content="@ampachts">
+        <meta name="tools" content="PHP,AngularJS,JavaScript,HTML,CSS">
+
+        <link rel="stylesheet" href="components/leaflet/leaflet.min.css">
+        <link rel="stylesheet" href="components/leaflet/MarkerCluster.css">
+        <link rel="stylesheet" href="components/leaflet/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="components/angular-toggle/angular-bootstrap-toggle.min.css">
+        <link rel="stylesheet" href="components/angular-xeditable/xeditable.min.css">
+        <link rel="stylesheet" href="components/angular-loading-bar/loading-bar.min.css">
+        <link rel="stylesheet" href="components/angular-datatables/angular-datatables.min.css">
+        <link rel="stylesheet" href="components/angular-datatables/datatables.bootstrap.min.css">
+        <link rel="stylesheet" href="styles/main.min.css">
+        <link rel="stylesheet" href="styles/style.css">
+    </head>
+    <body ng-app="smartMeters">
+        <!--[if lt IE 7]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div ui-view></div>
+
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+        <script src="components/leaflet/leaflet.js"></script>
+        <script src="components/leaflet/Leaflet.GoogleMutant.js"></script>
+        <script src="components/leaflet/leaflet.markercluster.js"></script>
+
+        <script src="components/datatables.net/jquery.min.js"></script>
+        <script src="components/datatables.net/jquery.dataTables.min.js"></script>
+
+        <script src="components/angular/angular.min.js"></script>
+        
+        <script src="components/angular-datatables/angular-datatables.min.js"></script>
+        
+        <script src="components/angular-ui/ui-bootstrap-tpls.min.js"></script>
+        <script src="components/angular/angular-mocks.js"></script>
+        <script src="components/ui-router/angular-ui-router.min.js"></script>
+        <script src="components/angular/angular-animate.min.js"></script>
+        <script src="components/ngstorage/ngStorage.min.js"></script>
+        <script src="components/angular-spinner/spin.js"></script>
+        <script src="components/angular-spinner/angular-spinner.min.js"></script>
+        <script src="components/datetime-picker/datetime-picker.min.js"></script>
+        <script src="components/angular-toggle/angular-bootstrap-toggle.min.js"></script>
+        <script src="components/charts/Chart.min.js"></script>
+        <script src="components/charts/angular-chart.min.js"></script>
+        <script src="components/charts/chartjs-plugin-labels.min.js"></script>
+        <script src="components/lodash/lodash.min.js"></script>
+        <script src="components/angular-moment/moment.js"></script>
+        <script src="components/angular-moment/angular-moment.min.js"></script>
+        <script src="components/angular-xeditable/xeditable.min.js"></script>
+        <script src="components/angular-swipe/angular-swipe.min.js"></script>
+        <script src="components/angular-loading-bar/loading-bar.min.js"></script>
+        <script src="components/filesaver/FileSaver.min.js"></script>
+        <script src="components/fontawesome/brands.min.js"></script>
+        <script src="components/fontawesome/solid.min.js"></script>
+        <script src="components/fontawesome/fontawesome.min.js"></script>
+
+        <!-- load translations -->
+        <script src="components/angular-translate/angular-translate.min.js"></script>
+        <script src="translations/el.txt"></script>
+        <script src="translations/en.txt"></script>
+        <script>var translations = {el:el,en:en};</script>
+
+        <!-- versioning for cache purposes -->
+        <script>
+            var version = new Date().getTime();
+            document.write(
+                "<script src='scripts/app.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/leaflet.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/services.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/filters.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/controllers/login.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/controllers/dashboard.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/controllers/overview.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/controllers/map.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/controllers/users.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/controllers/settings.js?v=" + version + "'><\/script>"+
+                "<script src='scripts/controllers/report.js?v=" + version + "'><\/script>"
+            );
+        </script>
+    </body>
+</html>

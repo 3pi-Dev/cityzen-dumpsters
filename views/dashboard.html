@@ -1,0 +1,62 @@
+<div class="dashboard-page">
+	<div class="container-fluid">
+		<div class="row menu">
+			<div class="col-xs-12 toggle-menu text-center" ng-swipe-down="isCollapsed=false">
+				<button type="button" class="btn btn-default noPreventDefault" ng-click="isCollapsed = !isCollapsed">Menu</button>
+			</div>
+			<div class="col-sm-3 col-md-2 sidebar" uib-collapse="isCollapsed" ng-swipe-up="collapse()" ng-if="!isCollapsed">
+				<div class="text-center">
+					<h2 class="brand">SkyCity<br><small>{{user.title || 'Smart meters platform'}}</small></h2>
+					<img ng-src="images/{{user.logo || 'logo.png'}}" class="user-avatar img-circle img-thumbnail"/><br>
+					<h3>
+						<a ui-sref="users" class="user-link" uib-tooltip="{{'ds_profile'|translate}}"><i class="far fa-user"></i> {{user.name}}</a>
+						<a ui-sref="logout" class="btn btn-white btn-outline btn-rounded btn-sm" uib-tooltip="{{'ds_logout'|translate}}"><i class="fas fa-sign-out-alt"></i></a>
+					</h3>
+					<div class="btn-group">
+						<button class="btn btn-sm btn-default btn-login-left" ng-class="{active: $session.lang=='el'}" ng-click="changeLanguage('el')"><img src="images/flag_1.png"> Ελληνικά</button>
+						<button class="btn btn-sm btn-default btn-login-right" ng-class="{active: $session.lang=='en'}" ng-click="changeLanguage('en')"><img src="images/flag_2.png"> English</button>
+					</div>
+				</div>
+				<br>
+				<input type="search" ng-model="status.search" class="form-control noPreventDefault" placeholder="{{'ds_search'|translate}}" uib-typeahead="result as result.description for result in getResults($viewValue)" typeahead-loading="loading1" typeahead-no-results="noResults1" typeahead-min-length="3" typeahead-append-to-body="true" typeahead-wait-ms="500" typeahead-editable="false" typeahead-on-select="afterSearch($item)">
+				<div>
+					<i ng-show="loading1" class="glyphicon glyphicon-refresh"></i>
+					<span ng-show="noResults1"><i class="glyphicon glyphicon-remove"></i>{{'ds_noresults'|translate}}</span>
+				</div>
+				<ul class="nav nav-sidebar">
+					<li class="row nav-links" ng-class="{active: $state.includes('map')}">
+						<a ui-sref="map" ng-click="status.open1=!status.open1">
+							<i class="fas fa-map-marked-alt"></i> {{'ds_blocks'|translate}}
+							<i ng-if="$state.includes('map')" class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open1, 'glyphicon-chevron-right': !status.open1}"></i>
+						</a>
+						<div uib-collapse="!status.open1">
+							<ul class="nav nav-sidebar filterLinks" ng-if="$state.includes('map')">
+								<li ng-if="status.dumpsters">{{'ds_fullDumps'|translate}}: 
+									<toggle ng-model="filters.dump" size="btn-sm" style="android" onstyle="btn-electro" offstyle="btn-electro" on="On" off="Off" ng-change="filterBlocks()"></toggle>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li ng-class="{active: $state.includes('users')}">
+						<a ui-sref="users"><i class="fas fa-user-cog"></i> {{'ds_profile'|translate}}</a>
+					</li>
+					<li ng-class="{active: $state.includes('report')}">
+						<a href="" ng-click="status.open2 = !status.open2">
+							<i class="fas fa-clipboard-list"></i> {{'ds_reports'|translate}} 
+							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open2, 'glyphicon-chevron-right': !status.open2}"></i>
+						</a>
+						<div uib-collapse="!status.open2">
+							<ul class="nav nav-sidebar reportLinks">
+								<li ng-repeat="r in reports">
+									<a ui-sref="report({reportID: r.id})" ng-if="isReportActive(r.id)">{{r.title}} </a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+				<div class="logo3pi"><a href="https://3pi-telematics.com/" target="_blanc"><img src="images/3piLogo.png" /></a></div>
+			</div>
+			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view></div>
+		</div>
+	</div>
+</div>
